@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
@@ -18,16 +19,16 @@ driver.get('https://www.google.com/')
 # populate search field
 search = driver.find_element(By.NAME, 'q')
 search.clear()
-search.send_keys('table')
+search.send_keys('car')
 
 # wait for 4 sec
 sleep(4)
 
-# click search button
-driver.find_element(By.NAME, 'btnK').click()
+# submit search by pressing Enter key instead of clicking button
+search.send_keys(Keys.RETURN)
 
 # verify search results
-assert 'table'.lower() in driver.current_url.lower(), f"Expected query not in {driver.current_url.lower()}"
+assert 'car'.lower() in driver.current_url.lower(), f"Expected query not in {driver.current_url.lower()}"
 print('Test Passed')
 
 driver.quit()
